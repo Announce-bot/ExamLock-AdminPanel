@@ -10,6 +10,17 @@ import ctypes
 import winsound
 import psutil
 from pynput import keyboard
+import requests
+
+ADMIN_PANEL_URL = "https://examlock-adminpanel.onrender.com/logs"
+
+def report_violation(event):
+    data = {"student_id": "Student_PC", "violation": event}
+    requests.post(ADMIN_PANEL_URL, json=data)
+
+# Example: Report when a student tries to exit
+report_violation("ALT+TAB attempt detected")
+
 
 # Configuration
 EXAM_URL = "https://lms.lau.edu.gy"  # Allowed exam site
